@@ -5,6 +5,8 @@ import "./Auth.css"
 export const Register = (props) => {
     const firstName = React.createRef()
     const lastName = React.createRef()
+    const fav_sport = React.createRef()
+    const fav_team = React.createRef()
     const email = React.createRef()
     const password = React.createRef()
     const verifyPassword = React.createRef()
@@ -17,6 +19,8 @@ export const Register = (props) => {
             const newUser = {
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
+                "fav_sport": fav_sport.current.value,
+                "fav_team": fav_team.current.value,
                 "email": email.current.value,
                 "password": password.current.value
             }
@@ -31,7 +35,7 @@ export const Register = (props) => {
             })
                 .then(res => res.json())
                 .then(res => {
-                    if ("token" in res) {
+                    if ("Token" in res) {
                         localStorage.setItem("Token", res.token)
                         props.history.push("/")
                     }
@@ -58,6 +62,14 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="lastName"> Last Name </label>
                     <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="fav_sport"> Favorite Sport </label>
+                    <input ref={fav_sport} type="fav_sport" name="fav_sport" className="form-control" placeholder="Favorite Sport" required />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="fav_team"> Favorite Team </label>
+                    <input ref={fav_team} type="fav_team" name="fav_team" className="form-control" placeholder="Favorite Team" required />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email address </label>
