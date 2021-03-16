@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import "./Auth.css"
 
 export const Register = (props) => {
+    const username = React.createRef()
     const firstName = React.createRef()
     const lastName = React.createRef()
     const fav_sport = React.createRef()
@@ -17,6 +18,7 @@ export const Register = (props) => {
 
         if (password.current.value === verifyPassword.current.value) {
             const newUser = {
+                "username": username.current.value,
                 "first_name": firstName.current.value,
                 "last_name": lastName.current.value,
                 "fav_sport": fav_sport.current.value,
@@ -55,6 +57,10 @@ export const Register = (props) => {
 
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Register an account</h1>
+                <fieldset>
+                    <label htmlFor="userName"> User Name </label>
+                    <input ref={username} type="text" name="userName" className="form-control" placeholder="User name" required autoFocus />
+                </fieldset>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
                     <input ref={firstName} type="text" name="firstName" className="form-control" placeholder="First name" required autoFocus />
