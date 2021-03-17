@@ -10,12 +10,17 @@ export const GameList = (props) => {
 
     return (
         <article className="games">
+            <header className="game__header">
+                <h1>Games</h1>
+            </header>
             {
                 games.map(game => {
                     return <section key={`game--${game.id}`} className="game">
-                        <div className="game__title">{game.title} by {game.maker}</div>
-                        <div className="game__players">{game.number_of_players} players needed</div>
-                        <div className="game__skillLevel">Skill level is {game.skill_level}</div>
+                        <div className="game__name">{game.name}</div>
+                        <div className="game__sport_type">{game.sporttype.type}</div>
+                        <div className="game__team_one">{game.team_one}</div>
+                        <div className="game__team_two">{game.team_two}</div>
+                        <div className="game__description">{game.description}</div>
                     </section>
                 })
             }

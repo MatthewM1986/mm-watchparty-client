@@ -1,9 +1,9 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { GameList } from "./game/GameList.js"
-import { GameProvider } from "./game/GameProvider.js"
-import { EventList } from "./game/EventList.js"
-import { EventProvider } from "./game/EventProvider.js"
+import { GameList } from "./games/GameList.js"
+import { GameProvider } from "./games/GameProvider.js"
+import { EventList } from "./watchparties/WatchPartyList.js"
+import { EventProvider } from "./watchparties/WatchPartyProvider.js"
 
 export const ApplicationViews = (props) => {
     return (
@@ -13,16 +13,16 @@ export const ApplicationViews = (props) => {
                 lineHeight: "1.75rem"
             }}>
                 <GameProvider>
-                    <Route exact path="/">
+                    <Route exact path="games">
                         <GameList />
                     </Route>
                 </GameProvider>
 
-                <EventProvider>
-                    <Route exact path="/events">
-                        <EventList />
+                <WatchPartyProvider>
+                    <Route exact path="/watchparties">
+                        <WatchPartyList />
                     </Route>
-                </EventProvider>
+                </WatchPartyProvider>
             </main>
         </>
     )

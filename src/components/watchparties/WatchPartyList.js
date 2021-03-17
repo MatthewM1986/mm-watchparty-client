@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { EventContext } from "./EventProvider.js"
+import { WatchPartyContext } from "./WatchPartyProvider.js"
 
 export const WatchPartyList = (props) => {
     const { watchparties, getWatchParties } = useContext(WatchPartyContext)
@@ -11,27 +11,18 @@ export const WatchPartyList = (props) => {
 
 
     return (
-        <article className="watchparty">
-            <header className="events__header">
-                <h1>Level Up Game Events</h1>
+        <article className="watchparties">
+            <header className="watchparty__header">
+                <h1>Watch Parties</h1>
             </header>
             {
-                events.map(event => {
-                    return <section key={event.id} className="registration">
-                        <div className="registration__game">{event.game.title}</div>
-                        <div>{event.description}</div>
-                        <div>
-                            {
-                                new Date(date).toLocaleDateString("en-US",
-                                    {
-                                        weekday: 'long',
-                                        year: 'numeric',
-                                        month: 'long',
-                                        day: 'numeric'
-                                    })
-                            }
-                                @ {event.time}
-                        </div>
+                watchparties.map(wp => {
+                    return <section key={`watchparty--${wp.id}`} className="watchparty">
+                        <div className="watchparty__name">{wp.name}</div>
+                        <div className="watchparty__scheduled_time">{wp.scheduled_time}</div>
+                        <div className="watchparty__game">{wp.game.name}</div>
+                        <div className="watchparty__location">{wp.location}</div>
+                        <div className="watchparty__number_of_fans">{wp.number_of_fans}</div>
                     </section>
                 })
             }
