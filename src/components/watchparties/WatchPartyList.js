@@ -8,8 +8,6 @@ export const WatchPartyList = (props) => {
         getWatchParties()
     }, [])
 
-
-
     return (
         <article className="watchparties">
             <header className="watchparty__header">
