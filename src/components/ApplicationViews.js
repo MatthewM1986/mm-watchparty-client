@@ -3,6 +3,7 @@ import { Route } from "react-router-dom"
 import { GameList } from "./games/GameList.js"
 import { GameProvider } from "./games/GameProvider.js"
 import { WatchPartyList } from "./watchparties/WatchPartyList.js"
+import { WatchPartyForm } from "./watchparties/WatchPartyForm.js"
 import { WatchPartyProvider } from "./watchparties/WatchPartyProvider.js"
 import { SportTypeProvider } from "./sporttypes/SportTypeProvider.js"
 
@@ -26,6 +27,9 @@ export const ApplicationViews = (props) => {
                         <WatchPartyProvider>
                             <Route exact path="/watchparties">
                                 <WatchPartyList />
+                            </Route>
+                            <Route exact path="/watchparties/create">
+                                <WatchPartyForm />
                             </Route>
                         </WatchPartyProvider>
                     </GameProvider>

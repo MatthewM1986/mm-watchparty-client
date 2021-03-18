@@ -28,6 +28,13 @@ export const GameList = (props) => {
                     </section>
                 })
             }
+            <section>
+                <button className="create__watchparty"
+                    onClick={() => {
+                        history.push({ pathname: "/watchparties/create" })
+                    }}
+                >Create Watch Party</button>
+            </section>
         </article>
     )
 }
