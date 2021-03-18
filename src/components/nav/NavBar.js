@@ -2,6 +2,8 @@ import React from "react"
 import { Link } from "react-router-dom"
 import "./NavBar.css"
 
+
+
 export const NavBar = (props) => {
     return (
         <ul className="navbar">
@@ -14,9 +16,17 @@ export const NavBar = (props) => {
             <li className="navbar__item">
                 <Link className="navbar__link" to="/watchparties">Watch Parties</Link>
             </li>
-            <li className="navbar__item">
-                <Link className="navbar__link" to="/login">Log Out</Link>
-            </li>
+            {
+                <li className="nav-item">
+                    (localStorage.getItem("Token") !== null) ?
+                        <button className="nav-link fakeLink"
+                        onClick={() => {
+                            localStorage.removeItem("Token")
+                            props.history.push({ pathname: "/login" })
+                        }}
+                    >Logout</button>
+                </li>
+            }
         </ul>
     )
 }

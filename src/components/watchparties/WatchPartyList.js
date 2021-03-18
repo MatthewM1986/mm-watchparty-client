@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from "react"
 import { WatchPartyContext } from "./WatchPartyProvider.js"
+import { GameContext } from "../games/GameProvider.js"
 
 export const WatchPartyList = (props) => {
     const { watchparties, getWatchParties } = useContext(WatchPartyContext)
+    const { games, getGames } = useContext(GameContext)
 
     useEffect(() => {
         getWatchParties()
+            .then(getGames)
     }, [])
 
     return (
@@ -15,7 +18,7 @@ export const WatchPartyList = (props) => {
             </header>
             {
                 watchparties.map(wp => {
-                    return <section key={`watchparty--${wp.id}`} className="watchparty">
+                    return <section key={wp.id} className="watchparty">
                         <div className="watchparty__name">{wp.name}</div>
                         <div className="watchparty__scheduled_time">{wp.scheduled_time}</div>
                         <div className="watchparty__game">{wp.game.name}</div>

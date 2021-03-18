@@ -4,6 +4,7 @@ import { GameList } from "./games/GameList.js"
 import { GameProvider } from "./games/GameProvider.js"
 import { WatchPartyList } from "./watchparties/WatchPartyList.js"
 import { WatchPartyProvider } from "./watchparties/WatchPartyProvider.js"
+import { SportTypeProvider } from "./sporttypes/SportTypeProvider.js"
 
 export const ApplicationViews = (props) => {
     return (
@@ -12,17 +13,23 @@ export const ApplicationViews = (props) => {
                 margin: "5rem 2rem",
                 lineHeight: "1.75rem"
             }}>
-                <GameProvider>
-                    <Route exact path="games">
-                        <GameList />
-                    </Route>
-                </GameProvider>
+                <SportTypeProvider>
+                    <GameProvider>
+                        <Route exact path="/games">
+                            <GameList />
+                        </Route>
+                    </GameProvider>
+                </SportTypeProvider>
 
-                <WatchPartyProvider>
-                    <Route exact path="/watchparties">
-                        <WatchPartyList />
-                    </Route>
-                </WatchPartyProvider>
+                <SportTypeProvider>
+                    <GameProvider>
+                        <WatchPartyProvider>
+                            <Route exact path="/watchparties">
+                                <WatchPartyList />
+                            </Route>
+                        </WatchPartyProvider>
+                    </GameProvider>
+                </SportTypeProvider>
             </main>
         </>
     )
