@@ -6,7 +6,7 @@ import { GameContext } from "../games/GameProvider.js"
 
 export const WatchPartyForm = () => {
     // const history = useHistory()
-    const { watchparty, createWatchParty } = useContext(WatchPartyContext)
+    const { createWatchParty } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
     // const [watchparty, setWatchParty] = useState({})
 
@@ -92,13 +92,12 @@ export const WatchPartyForm = () => {
                     />
                 </div>
             </fieldset>
-
             <button type="create"
                 onClick={evt => {
                     evt.preventDefault() // Prevent browser from submitting the form
                     createNewWatchParty()
                 }}
-            ></button>
+            >Create</button>
         </form >
     )
 }

@@ -19,7 +19,7 @@ export const WatchPartyProvider = (props) => {
 
     const createWatchParty = watchparty => {
 
-        return fetch("http://localhost:8088/watchparties", {
+        return fetch("http://localhost:8000/watchparties", {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("Token")}`,
@@ -28,11 +28,11 @@ export const WatchPartyProvider = (props) => {
             body: JSON.stringify(watchparty)
         })
             .then(res => res.json())
-            .then(setWatchParty)
     }
+    // console.log("create", setWatchParty)
 
     return (
-        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, watchparty, createWatchParty }} >
+        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty }} >
             { props.children}
         </WatchPartyContext.Provider>
     )
