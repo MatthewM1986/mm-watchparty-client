@@ -1,15 +1,17 @@
 import React, { useContext, useEffect } from "react"
+import { useHistory } from "react-router-dom"
 import { GameContext } from "./GameProvider.js"
 import { SportTypeContext } from "../sporttypes/SportTypeProvider.js"
 
-export const GameList = (props) => {
+export const GameList = () => {
     const { games, getGames } = useContext(GameContext)
     const { sporttypes, getSportTypes } = useContext(SportTypeContext)
+
+    const history = useHistory()
 
     useEffect(() => {
         getGames()
             .then(getSportTypes)
-
     }, [])
 
     return (
@@ -25,6 +27,12 @@ export const GameList = (props) => {
                         <div className="game__team_one">{game.team_one}</div>
                         <div className="game__team_two">{game.team_two}</div>
                         <div className="game__description">{game.description}</div>
+                        <button className="create__watchparty"
+                            onClick={() => {
+                                history.push("/watchparties/create")
+                                // console.log("history", history)
+                            }}
+                        >Create Watch Party</button>
                     </section>
                 })
             }
