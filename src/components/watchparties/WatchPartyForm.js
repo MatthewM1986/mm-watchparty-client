@@ -28,13 +28,14 @@ export const WatchPartyForm = () => {
 
     const history = useHistory()
 
-    const game = games.find(g => g.id === history.gameId) || {}
+    const game = games.find(g => g.id === history.game_id) || {}
 
     const createNewWatchParty = () => {
         createWatchParty({
             user_id: parseInt(localStorage.getItem("Token")),
             name: name.current.value,
             scheduled_time: time.current.value,
+            game: game,
             game: game.name,
             location: location.current.value,
             number_of_fans: fans.current.value,
