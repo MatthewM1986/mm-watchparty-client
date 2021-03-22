@@ -1,10 +1,12 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useHistory } from "react"
 import { WatchPartyContext } from "./WatchPartyProvider.js"
 import { GameContext } from "../games/GameProvider.js"
 
-export const WatchPartyList = (props) => {
+export const WatchPartyList = () => {
     const { watchparties, getWatchParties } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
+
+    const history = useHistory
 
     useEffect(() => {
         getWatchParties()
@@ -24,6 +26,11 @@ export const WatchPartyList = (props) => {
                         <div className="watchparty__game">{wp.game.name}</div>
                         <div className="watchparty__location">{wp.location}</div>
                         <div className="watchparty__number_of_fans">{wp.number_of_fans}</div>
+                        <button className="join__watchparty"
+                            onClick={() => {
+                                history.push("/")
+                            }}
+                        >Join Watch Party</button>
                     </section>
                 })
             }

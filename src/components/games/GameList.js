@@ -30,9 +30,13 @@ export const GameList = () => {
                         <button className="create__watchparty"
                             onClick={() => {
                                 history.push("/watchparties/create")
-                                // console.log("history", history)
                             }}
                         >Create Watch Party</button>
+                        <button className="search__watchparty"
+                            onClick={() => {
+                                // history.push("/watchparties/game_id")
+                            }}
+                        >Search Watch Parties</button>
                     </section>
                 })
             }
