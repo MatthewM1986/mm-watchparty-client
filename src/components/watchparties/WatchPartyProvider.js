@@ -42,8 +42,30 @@ export const WatchPartyProvider = (props) => {
             .then(getWatchParties)
     }
 
+    const getWatchPartiesByUserId = () => {
+        // console.log("token userid", userId)
+        // userId = localStorage.getItem("Token")
+        return fetch(`http://localhost:8000/watchparties?sortby=user`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("Token")}`
+            },
+        })
+            .then(response => response.json())
+            .then(setWatchParties)
+    }
+
+    // const joinEvent = eventId => {
+    //     return fetch(`http://localhost:8000/events/${eventId}/signup`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Authorization": `Token ${localStorage.getItem("lu_token")}`
+    //         }
+    //     })
+    //         .then(response => response.json())
+    // }
+
     return (
-        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty }} >
+        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty, editWatchParty, getWatchPartiesByUserId }} >
             { props.children}
         </WatchPartyContext.Provider>
     )

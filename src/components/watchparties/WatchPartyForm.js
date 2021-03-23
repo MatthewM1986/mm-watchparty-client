@@ -44,7 +44,7 @@ export const WatchPartyForm = (props) => {
                 location: location.current.value,
                 number_of_fans: fans.current.value,
             }
-            updatePost(editWatchParty).then(history.push("/"))
+            editWatchParty(editWatchParty).then(history.push("/"))
         } else {
             createWatchParty({
                 user_id: parseInt(localStorage.getItem("Token")),
