@@ -1,17 +1,19 @@
 import React, { useContext, useEffect } from "react"
+import { useHistory, useParams } from "react-router-dom"
 import { WatchPartyContext } from "../watchparties/WatchPartyProvider"
 
 
 export const ProfileList = (props) => {
-    const { watchparties, getWatchPartiesByUserId } = useContext(WatchPartyContext)
+    const { watchparties, getWatchPartiesByUserId, deleteWatchParty } = useContext(WatchPartyContext)
 
-
+    const history = useHistory()
 
     useEffect(() => {
         getWatchPartiesByUserId()
     }, [])
+    console.log("props", props)
+    console.log("params", useParams())
 
-    console.log("watch parties", watchparties)
     return (
         <div>
             <h1>My Watch Parties</h1>
@@ -23,6 +25,19 @@ export const ProfileList = (props) => {
                         <div className="watchparty__game">{wp.game.name}</div>
                         <div className="watchparty__location">{wp.location}</div>
                         <div className="watchparty__number_of_fans">{wp.number_of_fans}</div>
+                        <button className="edit__watchparty"
+                            onClick={() => {
+                                history.push(`/watchparties/${wp.id}/edit`)
+                            }}
+                        >Edit</button>
+                        <button className="delete__watchparty"
+                            onClick={() => {
+                                deleteWatchParty(wp.id)
+                                    .then(() => {
+                                        history.push("/")
+                                    })
+                            }}
+                        >Delete</button>
                     </section>
                 })
             }

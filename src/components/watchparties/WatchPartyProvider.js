@@ -42,9 +42,18 @@ export const WatchPartyProvider = (props) => {
             .then(getWatchParties)
     }
 
+    const deleteWatchParty = Id => {
+        return fetch(`http://localhost:8000/watchparties/${Id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("Token")}`
+            },
+        })
+            .then(getWatchParties)
+    }
+
     const getWatchPartiesByUserId = () => {
-        // console.log("token userid", userId)
-        // userId = localStorage.getItem("Token")
         return fetch(`http://localhost:8000/watchparties?sortby=user`, {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("Token")}`
@@ -65,7 +74,7 @@ export const WatchPartyProvider = (props) => {
     // }
 
     return (
-        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty, editWatchParty, getWatchPartiesByUserId }} >
+        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty, editWatchParty, getWatchPartiesByUserId, deleteWatchParty }} >
             { props.children}
         </WatchPartyContext.Provider>
     )

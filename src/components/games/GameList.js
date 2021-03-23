@@ -32,11 +32,11 @@ export const GameList = () => {
                                 history.push("/watchparties/create")
                             }}
                         >Create Watch Party</button>
-                        <button className="search__watchparty"
+                        {/* <button className="search__watchparty"
                             onClick={() => {
                                 // history.push("/watchparties/game_id")
                             }}
-                        >Search Watch Parties</button>
+                        >Search Watch Parties</button> */}
                     </section>
                 })
             }

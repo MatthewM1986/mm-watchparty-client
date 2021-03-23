@@ -30,8 +30,12 @@ export const ApplicationViews = (props) => {
                                 <WatchPartyList />
                             </Route>
                             <Route exact path="/watchparties/create">
-                                <WatchPartyForm />
+                                <WatchPartyForm {...props} />
                             </Route>
+                            <Route exact path="/watchparties/:id(\d+)/edit"
+                                render={(props) => {
+                                    return <WatchPartyForm {...props} />
+                                }} />
                         </WatchPartyProvider>
                     </GameProvider>
                 </SportTypeProvider>
@@ -40,7 +44,7 @@ export const ApplicationViews = (props) => {
                     <GameProvider>
                         <WatchPartyProvider>
                             <Route exact path="/">
-                                <ProfileList />
+                                <ProfileList {...props} />
                             </Route>
                         </WatchPartyProvider>
                     </GameProvider>
