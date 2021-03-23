@@ -29,7 +29,18 @@ export const WatchPartyProvider = (props) => {
         })
             .then(res => res.json())
     }
-    // console.log("create", setWatchParty)
+
+    const editWatchParty = (watchparty) => {
+        return fetch(`http://localhost:8000/watchparties/${watchparty.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("Token")}`
+            },
+            body: JSON.stringify(watchparty)
+        })
+            .then(getWatchParties)
+    }
 
     return (
         <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty }} >
