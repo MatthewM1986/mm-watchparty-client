@@ -5,33 +5,44 @@ import { GameContext } from "../games/GameProvider.js"
 
 
 export const WatchPartyForm = (props) => {
-
     console.log("props", props)
 
-    const [editWatchParty, SetWatchParty] = useState()
-
-    const { createWatchParty, watchparty, setWatchParty, getWatchParty } = useContext(WatchPartyContext)
+    const { createWatchParty, watchparties, getWatchParties, editWatchParty, watchparty, getWatchPartiesByUserId } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
+
+    const [currentWatchParty, setCurrentWatchParty] = useState()
+    console.log("current watch party", watchparties)
+    console.log("watch party", watchparty)
 
     const name = useRef(null)
     const time = useRef(null)
     const location = useRef(null)
     const fans = useRef(null)
 
-    useEffect(() => {
-        getGames()
-            .then(getWatchParty)
-    }, [])
-
-    // useEffect(() => {
-    //     getWatchParty(parseInt(props.match.params))
-    // }, [])
 
     const handleInputChange = (event) => {
         const newWatchParty = Object.assign({}, watchparty)
         newWatchParty[event.target.name] = event.target.value
-        setWatchParty(newWatchParty)
+        setCurrentWatchParty(newWatchParty)
     }
+
+
+    // const getWatchPartyInEditMode = () => {
+    //     if (editMode) {
+    //         const id = parseInt(props.match.params.id)
+    //         const selectedWatchParty = watchparties.find(wp => wp.id === id) || {}
+    //         setWatchParty(selectedWatchParty)
+    //     }
+    // }
+
+    useEffect(() => {
+        getGames()
+            .then(getWatchPartiesByUserId)
+    }, [])
+
+    // useEffect(() => {
+    //     getWatchPartyInEditMode()
+    // }, [watchparties])
 
     const history = useHistory()
 
@@ -43,16 +54,16 @@ export const WatchPartyForm = (props) => {
     const createNewWatchParty = () => {
         if (editMode) {
 
-            const editWatchParty = {
-                id: parseInt(history.watchPartyId),
-                user_id: parseInt(localStorage.getItem("Token")),
+            editWatchParty({
+                id: parseInt(props.match.params.id),
+                // user_id: props.match.params.id,
                 name: name.current.value,
                 scheduled_time: time.current.value,
                 game: game.name,
                 location: location.current.value,
                 number_of_fans: fans.current.value,
-            }
-            editWatchParty(editWatchParty).then(history.push("/"))
+            })
+                .then(() => history.push("/"))
         } else {
             createWatchParty({
                 user_id: parseInt(localStorage.getItem("Token")),
@@ -62,9 +73,7 @@ export const WatchPartyForm = (props) => {
                 location: location.current.value,
                 number_of_fans: fans.current.value,
             })
-                .then(() => {
-                    history.push(`/`)
-                })
+                .then(() => history.push(`/`))
         }
     }
 
@@ -120,8 +129,7 @@ export const WatchPartyForm = (props) => {
                     evt.preventDefault() // Prevent browser from submitting the form
                     createNewWatchParty()
                 }}
-            >Submit
-                {editMode ? "Save Updates" : "Make Post"}
+            >{editMode ? "Submit" : "Submit"}
             </button>
         </form >
     )

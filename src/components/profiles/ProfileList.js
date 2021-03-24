@@ -41,8 +41,8 @@ export const ProfileList = (props) => {
                     </section>
                 })
             }
-            {/* <h1>Joined Watch parties</h1>
-            {
+            <h1>Joined Watch parties</h1>
+            {/* {
                 watchparties.map(wp => <Post key={wp.id} post={wp} props={props} />)
             } */}
         </div>

@@ -6,6 +6,7 @@ export const WatchPartyContext = React.createContext()
 export const WatchPartyProvider = (props) => {
     const [watchparties, setWatchParties] = useState([])
     const [watchparty, setWatchParty] = useState({})
+    console.log("watchpartyies", watchparties)
 
     const getWatchParties = () => {
         return fetch("http://localhost:8000/watchparties", {
