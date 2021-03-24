@@ -82,6 +82,7 @@ export const WatchPartyProvider = (props) => {
             }
         })
             .then(response => response.json())
+            .then(getWatchParties)
     }
 
     const leaveWatchParty = watchPartyId => {
