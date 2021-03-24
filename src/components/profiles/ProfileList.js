@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { useHistory, useParams } from "react-router-dom"
+import { useHistory, useParams, Link } from "react-router-dom"
 import { WatchPartyContext } from "../watchparties/WatchPartyProvider"
 
 
@@ -25,11 +25,18 @@ export const ProfileList = (props) => {
                         <div className="watchparty__game">{wp.game.name}</div>
                         <div className="watchparty__location">{wp.location}</div>
                         <div className="watchparty__number_of_fans">{wp.number_of_fans}</div>
-                        <button className="edit__watchparty"
-                            onClick={() => {
-                                history.push(`/watchparties/${wp.id}/edit`)
-                            }}
-                        >Edit</button>
+                        <button className="edit__watchparty">
+                            <Link
+                                to={{
+                                    pathname: `/watchparties/${wp.id}/edit`,
+                                    state: { WatchParty: wp }
+                                }}>
+                                Edit </Link>
+                        </button>
+
+
+
+
                         <button className="delete__watchparty"
                             onClick={() => {
                                 deleteWatchParty(wp.id)
@@ -45,6 +52,6 @@ export const ProfileList = (props) => {
             {/* {
                 watchparties.map(wp => <Post key={wp.id} post={wp} props={props} />)
             } */}
-        </div>
+        </div >
     )
 }
