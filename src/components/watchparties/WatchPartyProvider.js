@@ -6,6 +6,7 @@ export const WatchPartyContext = React.createContext()
 export const WatchPartyProvider = (props) => {
     const [watchparties, setWatchParties] = useState([])
     const [watchparty, setWatchParty] = useState({})
+    console.log("watchpartyies", watchparties)
 
     const getWatchParties = () => {
         return fetch("http://localhost:8000/watchparties", {
@@ -29,10 +30,52 @@ export const WatchPartyProvider = (props) => {
         })
             .then(res => res.json())
     }
-    // console.log("create", setWatchParty)
+
+    const editWatchParty = (watchparty) => {
+        return fetch(`http://localhost:8000/watchparties/${watchparty.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("Token")}`
+            },
+            body: JSON.stringify(watchparty)
+        })
+            .then(getWatchParties)
+    }
+
+    const deleteWatchParty = Id => {
+        return fetch(`http://localhost:8000/watchparties/${Id}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("Token")}`
+            },
+        })
+            .then(getWatchParties)
+    }
+
+    const getWatchPartiesByUserId = () => {
+        return fetch(`http://localhost:8000/watchparties?sortby=user`, {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("Token")}`
+            },
+        })
+            .then(response => response.json())
+            .then(setWatchParties)
+    }
+
+    // const joinEvent = eventId => {
+    //     return fetch(`http://localhost:8000/events/${eventId}/signup`, {
+    //         method: "POST",
+    //         headers: {
+    //             "Authorization": `Token ${localStorage.getItem("lu_token")}`
+    //         }
+    //     })
+    //         .then(response => response.json())
+    // }
 
     return (
-        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty }} >
+        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, watchparty, createWatchParty, setWatchParty, editWatchParty, getWatchPartiesByUserId, deleteWatchParty }} >
             { props.children}
         </WatchPartyContext.Provider>
     )

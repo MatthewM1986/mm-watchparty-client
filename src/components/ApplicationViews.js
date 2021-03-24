@@ -6,6 +6,7 @@ import { WatchPartyList } from "./watchparties/WatchPartyList.js"
 import { WatchPartyForm } from "./watchparties/WatchPartyForm.js"
 import { WatchPartyProvider } from "./watchparties/WatchPartyProvider.js"
 import { SportTypeProvider } from "./sporttypes/SportTypeProvider.js"
+import { ProfileList } from "./profiles/ProfileList.js"
 
 export const ApplicationViews = (props) => {
     return (
@@ -29,7 +30,21 @@ export const ApplicationViews = (props) => {
                                 <WatchPartyList />
                             </Route>
                             <Route exact path="/watchparties/create">
-                                <WatchPartyForm />
+                                <WatchPartyForm {...props} />
+                            </Route>
+                            <Route exact path="/watchparties/:id(\d+)/edit"
+                                render={(props) => {
+                                    return <WatchPartyForm {...props} />
+                                }} />
+                        </WatchPartyProvider>
+                    </GameProvider>
+                </SportTypeProvider>
+
+                <SportTypeProvider>
+                    <GameProvider>
+                        <WatchPartyProvider>
+                            <Route exact path="/">
+                                <ProfileList {...props} />
                             </Route>
                         </WatchPartyProvider>
                     </GameProvider>
