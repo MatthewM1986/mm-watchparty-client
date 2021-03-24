@@ -75,7 +75,7 @@ export const WatchPartyProvider = (props) => {
     }
 
     const joinWatchParty = watchPartyId => {
-        return fetch(`http://localhost:8000/events/${watchPartyId}/signup`, {
+        return fetch(`http://localhost:8000/watchparties/${watchPartyId}/signup`, {
             method: "POST",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("Token")}`
@@ -86,7 +86,7 @@ export const WatchPartyProvider = (props) => {
     }
 
     const leaveWatchParty = watchPartyId => {
-        return fetch(`http://localhost:8000/events/${watchPartyId}/signup`, {
+        return fetch(`http://localhost:8000/watchparties/${watchPartyId}/signup`, {
             method: "DELETE",
             headers: {
                 "Authorization": `Token ${localStorage.getItem("Token")}`
