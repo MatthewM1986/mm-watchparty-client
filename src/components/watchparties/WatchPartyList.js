@@ -3,7 +3,7 @@ import { WatchPartyContext } from "./WatchPartyProvider.js"
 import { GameContext } from "../games/GameProvider.js"
 
 export const WatchPartyList = () => {
-    const { watchparties, getWatchParties } = useContext(WatchPartyContext)
+    const { watchparties, getWatchParties, joinWatchParty } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
 
     const history = useHistory
@@ -27,9 +27,7 @@ export const WatchPartyList = () => {
                         <div className="watchparty__location">{wp.location}</div>
                         <div className="watchparty__number_of_fans">{wp.number_of_fans}</div>
                         <button className="join__watchparty"
-                            onClick={() => {
-                                history.push("/")
-                            }}
+                            onClick={() => joinWatchParty(wp.id)}
                         >Join Watch Party</button>
                     </section>
                 })

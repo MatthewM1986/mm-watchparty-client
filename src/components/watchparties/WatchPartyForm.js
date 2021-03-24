@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, useLocation } from "react-router-dom"
 import { WatchPartyContext } from "./WatchPartyProvider.js"
 import { GameContext } from "../games/GameProvider.js"
 
 
 export const WatchPartyForm = (props) => {
-    console.log("props", props)
+    console.log("props!!!", props)
 
-    const { createWatchParty, watchparties, getWatchParties, editWatchParty, watchparty, getWatchPartiesByUserId } = useContext(WatchPartyContext)
+    const { getSingleWatchParty, createWatchParty, watchparties, editWatchParty, watchparty, getWatchPartiesByUserId } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
 
     const [currentWatchParty, setCurrentWatchParty] = useState()
@@ -38,6 +38,7 @@ export const WatchPartyForm = (props) => {
     useEffect(() => {
         getGames()
             .then(getWatchPartiesByUserId)
+            .then(getSingleWatchParty(history.location.state.WatchParty.id))
     }, [])
 
     // useEffect(() => {
@@ -45,6 +46,8 @@ export const WatchPartyForm = (props) => {
     // }, [watchparties])
 
     const history = useHistory()
+    console.log("history", history)
+
 
     const editMode = props.match.params.hasOwnProperty("id")
     console.log("edit mode", editMode)
