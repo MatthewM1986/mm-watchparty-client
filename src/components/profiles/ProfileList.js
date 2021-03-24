@@ -4,7 +4,7 @@ import { WatchPartyContext } from "../watchparties/WatchPartyProvider"
 
 
 export const ProfileList = (props) => {
-    const { watchparties, getWatchPartiesByUserId, deleteWatchParty } = useContext(WatchPartyContext)
+    const { watchparties, getWatchPartiesByUserId, deleteWatchParty, joinWatchParty, leaveWatchParty } = useContext(WatchPartyContext)
 
     const history = useHistory()
 
@@ -32,10 +32,6 @@ export const ProfileList = (props) => {
                                 }}>
                                 Edit </Link>
                         </button>
-
-
-
-
                         <button className="delete__watchparty"
                             onClick={() => {
                                 deleteWatchParty(wp.id)
@@ -48,9 +44,26 @@ export const ProfileList = (props) => {
                 })
             }
             <h1>Joined Watch parties</h1>
-            {/* {
-                watchparties.map(wp => <Post key={wp.id} post={wp} props={props} />)
-            } */}
+            {
+                watchparties.map(wp => {
+                    return <section key={wp.id} className="watchparty">
+                        <div className="watchparty__name">{wp.name}</div>
+                        <div className="watchparty__scheduled_time">{wp.scheduled_time}</div>
+                        <div className="watchparty__game">{wp.game.name}</div>
+                        <div className="watchparty__location">{wp.location}</div>
+                        <div className="watchparty__number_of_fans">{wp.number_of_fans}</div>
+                        {
+                            wp.joined
+                                ? <button className="btn btn-3"
+                                    onClick={() => leaveWatchParty(wp.id)}
+                                >Leave</button>
+                                : <button className="btn btn-2"
+                                    onClick={() => joinWatchParty(wp.id)}
+                                >Join</button>
+                        }
+                    </section>
+                })
+            }
         </div >
     )
 }
