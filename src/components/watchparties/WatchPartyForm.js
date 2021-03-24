@@ -5,10 +5,9 @@ import { GameContext } from "../games/GameProvider.js"
 
 
 export const WatchPartyForm = (props) => {
+    console.log("props!!!", props)
 
-    console.log("propsHeath", props)
-
-    const { getSingleWatchParty, createWatchParty, watchparties, getWatchParties, editWatchParty, watchparty, getWatchPartiesByUserId } = useContext(WatchPartyContext)
+    const { getSingleWatchParty, createWatchParty, watchparties, editWatchParty, watchparty, getWatchPartiesByUserId } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
 
     const [currentWatchParty, setCurrentWatchParty] = useState()
@@ -39,7 +38,7 @@ export const WatchPartyForm = (props) => {
     useEffect(() => {
         getGames()
             .then(getWatchPartiesByUserId)
-            .then(getSingleWatchParty)
+            .then(getSingleWatchParty(history.location.state.WatchParty.id))
     }, [])
 
     // useEffect(() => {
@@ -48,10 +47,6 @@ export const WatchPartyForm = (props) => {
 
     const history = useHistory()
     console.log("history", history)
-
-    const routelocation = useLocation()
-    console.log("location", routelocation)
-
 
 
     const editMode = props.match.params.hasOwnProperty("id")

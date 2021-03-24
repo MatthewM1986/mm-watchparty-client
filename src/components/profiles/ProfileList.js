@@ -11,7 +11,6 @@ export const ProfileList = (props) => {
     useEffect(() => {
         getWatchPartiesByUserId()
     }, [])
-    console.log("props", props)
     console.log("params", useParams())
 
     return (

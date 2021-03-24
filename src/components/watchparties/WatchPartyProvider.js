@@ -74,18 +74,18 @@ export const WatchPartyProvider = (props) => {
             .then(setWatchParties)
     }
 
-    // const joinEvent = eventId => {
-    //     return fetch(`http://localhost:8000/events/${eventId}/signup`, {
-    //         method: "POST",
-    //         headers: {
-    //             "Authorization": `Token ${localStorage.getItem("lu_token")}`
-    //         }
-    //     })
-    //         .then(response => response.json())
-    // }
+    const joinWatchParty = watchPartyId => {
+        return fetch(`http://localhost:8000/events/${watchPartyId}/signup`, {
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("Token")}`
+            }
+        })
+            .then(response => response.json())
+    }
 
     return (
-        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, getSingleWatchParty, watchparty, createWatchParty, setWatchParty, editWatchParty, getWatchPartiesByUserId, deleteWatchParty }} >
+        <WatchPartyContext.Provider value={{ watchparties, getWatchParties, setWatchParties, getSingleWatchParty, watchparty, createWatchParty, setWatchParty, editWatchParty, getWatchPartiesByUserId, deleteWatchParty, joinWatchParty }} >
             { props.children}
         </WatchPartyContext.Provider>
     )
