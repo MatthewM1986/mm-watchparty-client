@@ -7,7 +7,7 @@ import { GameContext } from "../games/GameProvider.js"
 export const WatchPartyForm = (props) => {
     console.log("props!!!", props)
 
-    const { getSingleWatchParty, createWatchParty, watchparties, editWatchParty, watchparty, getWatchPartiesByUserId } = useContext(WatchPartyContext)
+    const { getSingleWatchParty, createWatchParty, watchparties, editWatchParty, watchparty, getWatchPartiesByUserId, setWatchParty } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
 
     const [currentWatchParty, setCurrentWatchParty] = useState()
@@ -20,37 +20,36 @@ export const WatchPartyForm = (props) => {
     const fans = useRef(null)
 
 
+
+
+    // const chosenWatchParty = history.location.state.WatchParty.id
+    const editMode = props.match.params.hasOwnProperty("id")
+    console.log("edit mode", editMode)
+
+
     const handleInputChange = (event) => {
         const newWatchParty = Object.assign({}, watchparty)
         newWatchParty[event.target.name] = event.target.value
         setCurrentWatchParty(newWatchParty)
     }
 
-
-    // const getWatchPartyInEditMode = () => {
-    //     if (editMode) {
-    //         const id = parseInt(props.match.params.id)
-    //         const selectedWatchParty = watchparties.find(wp => wp.id === id) || {}
-    //         setWatchParty(selectedWatchParty)
-    //     }
-    // }
+    const getWatchPartyInEditMode = () => {
+        if (editMode) {
+            getSingleWatchParty(history.location.state.WatchParty.id)
+        }
+    }
 
     useEffect(() => {
         getGames()
             .then(getWatchPartiesByUserId)
-            .then(getSingleWatchParty(history.location.state.WatchParty.id))
+            .then(getWatchPartyInEditMode())
     }, [])
 
-    // useEffect(() => {
-    //     getWatchPartyInEditMode()
-    // }, [watchparties])
 
     const history = useHistory()
     console.log("history", history)
 
 
-    const editMode = props.match.params.hasOwnProperty("id")
-    console.log("edit mode", editMode)
 
     const game = games.find(g => g.id === history.gameId) || {}
 
@@ -80,60 +79,119 @@ export const WatchPartyForm = (props) => {
         }
     }
 
-    return (
-        <form className="watchpartyForm">
-            <h2 className="watchpartyForm__title">Watch Party</h2>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="name">Name: </label>
-                    <input type="text" id="name" ref={name}
-                        required autoFocus className="form-control" placeholder="Name"
-                        proptype="varchar"
-                        defaultValue={watchparty.name}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="time">Scheduled Time: </label>
-                    <input type="text" id="time" ref={time}
-                        required autoFocus className="form-control" placeholder="Time"
-                        proptype="varchar"
-                        defaultValue={watchparty.scheduled_time}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="location">Location: </label>
-                    <input type="text" id="location" ref={location}
-                        required autoFocus className="form-control" placeholder="Location"
-                        proptype="varchar"
-                        defaultValue={watchparty.location}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="fans">Max Fans Allowed: </label>
-                    <input type="text" id="fans" ref={fans}
-                        required autoFocus className="form-control" placeholder="Max Fans"
-                        proptype="varchar"
-                        defaultValue={watchparty.number_of_fans}
-                        onChange={handleInputChange}
-                    />
-                </div>
-            </fieldset>
-            <button type="submit"
-                onClick={evt => {
-                    evt.preventDefault() // Prevent browser from submitting the form
-                    createNewWatchParty()
-                }}
-            >{editMode ? "Submit" : "Submit"}
-            </button>
-        </form >
-    )
+    if (!history.location.state) {
+        // setWatchParty()
+        return (
+            <form className="watchpartyForm">
+                <h2 className="watchpartyForm__title">Watch Party</h2>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="name">Name: </label>
+                        <input type="text" id="name" ref={name}
+                            required autoFocus className="form-control" placeholder="Name"
+                            proptype="varchar"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="time">Scheduled Time: </label>
+                        <input type="text" id="time" ref={time}
+                            required autoFocus className="form-control" placeholder="Time"
+                            proptype="varchar"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="location">Location: </label>
+                        <input type="text" id="location" ref={location}
+                            required autoFocus className="form-control" placeholder="Location"
+                            proptype="varchar"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="fans">Max Fans Allowed: </label>
+                        <input type="text" id="fans" ref={fans}
+                            required autoFocus className="form-control" placeholder="Max Fans"
+                            proptype="varchar"
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <button type="submit"
+                    onClick={evt => {
+                        evt.preventDefault() // Prevent browser from submitting the form
+                        createNewWatchParty()
+                    }}
+                >{editMode ? "Submit" : "Submit"}
+                </button>
+            </form >
+        )
+    } else if (watchparty.id === history.location.state.WatchParty.id) {
+        return (
+            <form className="watchpartyForm">
+                <h2 className="watchpartyForm__title">Watch Party</h2>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="name">Name: </label>
+                        <input type="text" id="name" ref={name}
+                            required autoFocus className="form-control" placeholder="Name"
+                            proptype="varchar"
+                            defaultValue={watchparty.name}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="time">Scheduled Time: </label>
+                        <input type="text" id="time" ref={time}
+                            required autoFocus className="form-control" placeholder="Time"
+                            proptype="varchar"
+                            defaultValue={watchparty.scheduled_time}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="location">Location: </label>
+                        <input type="text" id="location" ref={location}
+                            required autoFocus className="form-control" placeholder="Location"
+                            proptype="varchar"
+                            defaultValue={watchparty.location}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="fans">Max Fans Allowed: </label>
+                        <input type="text" id="fans" ref={fans}
+                            required autoFocus className="form-control" placeholder="Max Fans"
+                            proptype="varchar"
+                            defaultValue={watchparty.number_of_fans}
+                            onChange={handleInputChange}
+                        />
+                    </div>
+                </fieldset>
+                <button type="submit"
+                    onClick={evt => {
+                        evt.preventDefault() // Prevent browser from submitting the form
+                        createNewWatchParty()
+                    }}
+                >{editMode ? "Submit" : "Submit"}
+                </button>
+            </form >
+        )
+    } else {
+        return <></>
+    }
+
 }

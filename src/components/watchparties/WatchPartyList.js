@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useHistory } from "react"
+import React, { useContext, useEffect, useHistory, useState } from "react"
 import { WatchPartyContext } from "./WatchPartyProvider.js"
 import { GameContext } from "../games/GameProvider.js"
 
@@ -7,6 +7,13 @@ export const WatchPartyList = () => {
     const { games, getGames } = useContext(GameContext)
 
     const history = useHistory
+
+    // const [currentWatchParties, SetCurrentWatchParties] = useState([])
+
+    // useEffect(() => {
+    //     const newWatchPartyState = watchparties
+    //     SetCurrentWatchParties(newWatchPartyState)
+    // }, [watchparties])
 
     useEffect(() => {
         getWatchParties()
@@ -35,9 +42,6 @@ export const WatchPartyList = () => {
                                     onClick={() => joinWatchParty(wp.id)}
                                 >Join</button>
                         }
-                        {/* <button className="join__watchparty"
-                            onClick={() => joinWatchParty(wp.id)}
-                        >Join</button> */}
                     </section>
                 })
             }
