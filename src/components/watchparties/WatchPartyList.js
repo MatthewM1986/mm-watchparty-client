@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useHistory } from "react"
+import React, { useContext, useEffect, useHistory, useState } from "react"
 import { WatchPartyContext } from "./WatchPartyProvider.js"
 import { GameContext } from "../games/GameProvider.js"
 
@@ -8,10 +8,17 @@ export const WatchPartyList = () => {
 
     const history = useHistory
 
+    // const [currentWatchParties, SetCurrentWatchParties] = useState([])
+
+    // useEffect(() => {
+    //     const newWatchPartyState = watchparties
+    //     SetCurrentWatchParties(newWatchPartyState)
+    // }, [watchparties])
+
     useEffect(() => {
         getWatchParties()
             .then(getGames)
-    }, joinWatchParty || leaveWatchParty)
+    }, [])
 
     return (
         <article className="watchparties">

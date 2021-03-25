@@ -1,10 +1,17 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { useHistory, useParams, Link } from "react-router-dom"
 import { WatchPartyContext } from "../watchparties/WatchPartyProvider"
 
 
 export const ProfileList = (props) => {
     const { watchparties, getWatchPartiesByUserId, deleteWatchParty, joinWatchParty, leaveWatchParty } = useContext(WatchPartyContext)
+
+    // const [WatchParty, SetCurrentWatchParty] = useState([])
+
+    // useEffect(() => {
+    //     const newWatchPartyState = watchparties
+    //     SetCurrentWatchParties(newWatchPartyState)
+    // }, [watchparties])
 
     const history = useHistory()
 
@@ -28,7 +35,8 @@ export const ProfileList = (props) => {
                             <Link
                                 to={{
                                     pathname: `/watchparties/${wp.id}/edit`,
-                                    state: { WatchParty: wp }
+                                    state: { WatchParty: wp },
+
                                 }}>
                                 Edit </Link>
                         </button>

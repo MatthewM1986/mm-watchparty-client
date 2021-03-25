@@ -92,7 +92,6 @@ export const WatchPartyProvider = (props) => {
                 "Authorization": `Token ${localStorage.getItem("Token")}`
             }
         })
-            .then(response => response.json())
             .then(getWatchParties)
     }
 
