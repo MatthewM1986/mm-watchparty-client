@@ -20,14 +20,12 @@ export const WatchPartyForm = (props) => {
     const fans = useRef(null)
 
 
-
-
-    // const chosenWatchParty = history.location.state.WatchParty.id
     const editMode = props.match.params.hasOwnProperty("id")
     console.log("edit mode", editMode)
 
 
     const handleInputChange = (event) => {
+
         const newWatchParty = Object.assign({}, watchparty)
         newWatchParty[event.target.name] = event.target.value
         setCurrentWatchParty(newWatchParty)
@@ -55,13 +53,12 @@ export const WatchPartyForm = (props) => {
 
     const createNewWatchParty = () => {
         if (editMode) {
-
             editWatchParty({
                 id: parseInt(props.match.params.id),
-                // user_id: props.match.params.id,
+                user_id: parseInt(localStorage.getItem("Token")),
                 name: name.current.value,
                 scheduled_time: time.current.value,
-                game: game.name,
+                game: game.id,
                 location: location.current.value,
                 number_of_fans: fans.current.value,
             })
@@ -71,7 +68,7 @@ export const WatchPartyForm = (props) => {
                 user_id: parseInt(localStorage.getItem("Token")),
                 name: name.current.value,
                 scheduled_time: time.current.value,
-                game: game.name,
+                game: game.id,
                 location: location.current.value,
                 number_of_fans: fans.current.value,
             })
@@ -80,7 +77,6 @@ export const WatchPartyForm = (props) => {
     }
 
     if (!history.location.state) {
-        // setWatchParty()
         return (
             <form className="watchpartyForm">
                 <h2 className="watchpartyForm__title">Watch Party</h2>
@@ -185,8 +181,7 @@ export const WatchPartyForm = (props) => {
                     onClick={evt => {
                         evt.preventDefault() // Prevent browser from submitting the form
                         createNewWatchParty()
-                    }}
-                >{editMode ? "Submit" : "Submit"}
+                    }}>{editMode ? "Submit" : "Submit"}
                 </button>
             </form >
         )

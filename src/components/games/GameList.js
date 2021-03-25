@@ -27,6 +27,7 @@ export const GameList = () => {
                         <div className="game__team_one">{game.team_one}</div>
                         <div className="game__team_two">{game.team_two}</div>
                         <div className="game__description">{game.description}</div>
+
                         <button className="create__watchparty"
                             onClick={() => {
                                 history.push("/watchparties/create")

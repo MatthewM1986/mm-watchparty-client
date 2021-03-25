@@ -4,7 +4,7 @@ import { WatchPartyContext } from "../watchparties/WatchPartyProvider"
 
 
 export const ProfileList = (props) => {
-    const { watchparties, getWatchPartiesByUserId, deleteWatchParty, joinWatchParty, leaveWatchParty } = useContext(WatchPartyContext)
+    const { watchparties, getWatchPartiesByUserId, deleteWatchParty, joinWatchParty, leaveWatchParty, userJoinWatchParty, SetJoinedWatchParty, joinedwatchparty } = useContext(WatchPartyContext)
 
     // const [WatchParty, SetCurrentWatchParty] = useState([])
 
@@ -17,6 +17,7 @@ export const ProfileList = (props) => {
 
     useEffect(() => {
         getWatchPartiesByUserId()
+            .then(userJoinWatchParty())
     }, [])
     console.log("params", useParams())
 
@@ -53,7 +54,7 @@ export const ProfileList = (props) => {
             }
             <h1>Joined Watch parties</h1>
             {
-                watchparties.map(wp => {
+                joinedwatchparty.map(wp => {
                     return <section key={wp.id} className="watchparty">
                         <div className="watchparty__name">{wp.name}</div>
                         <div className="watchparty__scheduled_time">{wp.scheduled_time}</div>
