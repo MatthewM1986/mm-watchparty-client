@@ -11,7 +11,7 @@ export const WatchPartyList = () => {
     useEffect(() => {
         getWatchParties()
             .then(getGames)
-    }, [])
+    }, joinWatchParty || leaveWatchParty)
 
     return (
         <article className="watchparties">
@@ -35,9 +35,6 @@ export const WatchPartyList = () => {
                                     onClick={() => joinWatchParty(wp.id)}
                                 >Join</button>
                         }
-                        {/* <button className="join__watchparty"
-                            onClick={() => joinWatchParty(wp.id)}
-                        >Join</button> */}
                     </section>
                 })
             }
