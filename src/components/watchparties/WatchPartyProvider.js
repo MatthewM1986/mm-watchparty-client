@@ -7,7 +7,8 @@ export const WatchPartyProvider = (props) => {
     const [watchparties, setWatchParties] = useState([])
     const [watchparty, setWatchParty] = useState({})
     const [joinedwatchparty, SetJoinedWatchParty] = useState([])
-    console.log("watchpartyies", watchparties)
+
+    console.log("watchparty", watchparty)
 
     const getWatchParties = () => {
         return fetch("http://localhost:8000/watchparties", {
@@ -26,7 +27,7 @@ export const WatchPartyProvider = (props) => {
             }
         })
             .then(res => res.json())
-            .then(setWatchParty)
+            .then(response => setWatchParty(response))
     }
 
     const createWatchParty = watchparty => {
@@ -93,6 +94,7 @@ export const WatchPartyProvider = (props) => {
             }
         })
             .then(getWatchParties)
+            .then(userJoinWatchParty)
     }
 
     const userJoinWatchParty = () => {

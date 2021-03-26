@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { GameContext } from "./GameProvider.js"
 import { SportTypeContext } from "../sporttypes/SportTypeProvider.js"
 
@@ -28,19 +28,23 @@ export const GameList = () => {
                         <div className="game__team_two">{game.team_two}</div>
                         <div className="game__description">{game.description}</div>
 
-                        <button className="create__watchparty"
-                            onClick={() => {
-                                history.push("/watchparties/create")
-                            }}
-                        >Create Watch Party</button>
+                        <button className="create__watchparty">
+                            <Link
+                                to={{
+                                    pathname: `/watchparties/${game.id}/create`,
+                                    state: { game: game.id },
+
+                                }}>
+                                Create </Link>
+                        </button>
                         {/* <button className="search__watchparty"
                             onClick={() => {
                                 // history.push("/watchparties/game_id")
                             }}
                         >Search Watch Parties</button> */}
-                    </section>
+                    </section >
                 })
             }
-        </article>
+        </article >
     )
 }

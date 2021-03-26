@@ -19,7 +19,6 @@ export const ProfileList = (props) => {
         getWatchPartiesByUserId()
             .then(userJoinWatchParty())
     }, [])
-    console.log("params", useParams())
 
     return (
         <div>
@@ -36,7 +35,7 @@ export const ProfileList = (props) => {
                             <Link
                                 to={{
                                     pathname: `/watchparties/${wp.id}/edit`,
-                                    state: { WatchParty: wp },
+                                    state: { game: wp.game.id, edit: true, WatchParty: wp.id },
 
                                 }}>
                                 Edit </Link>

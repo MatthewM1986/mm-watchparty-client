@@ -5,14 +5,11 @@ import { GameContext } from "../games/GameProvider.js"
 
 
 export const WatchPartyForm = (props) => {
-    console.log("props!!!", props)
 
     const { getSingleWatchParty, createWatchParty, watchparties, editWatchParty, watchparty, getWatchPartiesByUserId, setWatchParty } = useContext(WatchPartyContext)
     const { games, getGames } = useContext(GameContext)
 
     const [currentWatchParty, setCurrentWatchParty] = useState()
-    console.log("current watch party", watchparties)
-    console.log("watch party", watchparty)
 
     const name = useRef(null)
     const time = useRef(null)
@@ -20,9 +17,8 @@ export const WatchPartyForm = (props) => {
     const fans = useRef(null)
 
 
-    const editMode = props.match.params.hasOwnProperty("id")
-    console.log("edit mode", editMode)
-
+    const editMode = props.location.state.hasOwnProperty("edit")
+    console.log("props", props)
 
     const handleInputChange = (event) => {
 
@@ -33,7 +29,7 @@ export const WatchPartyForm = (props) => {
 
     const getWatchPartyInEditMode = () => {
         if (editMode) {
-            getSingleWatchParty(history.location.state.WatchParty.id)
+            getSingleWatchParty(history.location.state.WatchParty)
         }
     }
 
@@ -47,14 +43,21 @@ export const WatchPartyForm = (props) => {
     const history = useHistory()
     console.log("history", history)
 
+    let game = { id: null }
 
+    const gameList = () => {
+        if (games) {
+            game = games.find(g => g.id === history.location.state.game)
+            return game
+        } else { return {} }
+    }
 
-    const game = games.find(g => g.id === history.gameId) || {}
 
     const createNewWatchParty = () => {
+        gameList()
         if (editMode) {
             editWatchParty({
-                id: parseInt(props.match.params.id),
+                id: parseInt(props.location.state.WatchParty),
                 user_id: parseInt(localStorage.getItem("Token")),
                 name: name.current.value,
                 scheduled_time: time.current.value,
@@ -129,7 +132,7 @@ export const WatchPartyForm = (props) => {
                 </button>
             </form >
         )
-    } else if (watchparty.id === history.location.state.WatchParty.id) {
+    } else if (watchparty.id === history.location.state.WatchParty) {
         return (
             <form className="watchpartyForm">
                 <h2 className="watchpartyForm__title">Watch Party</h2>
@@ -179,7 +182,8 @@ export const WatchPartyForm = (props) => {
                 </fieldset>
                 <button type="submit"
                     onClick={evt => {
-                        evt.preventDefault() // Prevent browser from submitting the form
+                        evt.preventDefault()
+                        // Prevent browser from submitting the form
                         createNewWatchParty()
                     }}>{editMode ? "Submit" : "Submit"}
                 </button>
