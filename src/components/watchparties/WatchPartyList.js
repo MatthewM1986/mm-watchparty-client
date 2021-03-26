@@ -8,13 +8,6 @@ export const WatchPartyList = () => {
 
     const history = useHistory
 
-    // const [currentWatchParties, SetCurrentWatchParties] = useState([])
-
-    // useEffect(() => {
-    //     const newWatchPartyState = watchparties
-    //     SetCurrentWatchParties(newWatchPartyState)
-    // }, [watchparties])
-
     useEffect(() => {
         getWatchParties()
             .then(getGames)
@@ -37,6 +30,7 @@ export const WatchPartyList = () => {
                             wp.joined
                                 ? <button className="btn btn-3"
                                     onClick={() => leaveWatchParty(wp.id)}
+
                                 >Leave</button>
                                 : <button className="btn btn-2"
                                     onClick={() => joinWatchParty(wp.id)}
