@@ -82,10 +82,10 @@ export const WatchPartyForm = (props) => {
     if (!history.location.state) {
         return (
             <form className="watchpartyForm">
-                <h2 className="watchpartyForm__title">Watch Party</h2>
+                <h2 className="watchpartyForm__title" style={{ color: 'white' }}>Create Watch Party</h2>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="name">Name: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="name" style={{ color: 'white' }}>Name: </label>
                         <input type="text" id="name" ref={name}
                             required autoFocus className="form-control" placeholder="Name"
                             proptype="varchar"
@@ -94,8 +94,8 @@ export const WatchPartyForm = (props) => {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="time">Scheduled Time: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="time" style={{ color: 'white' }}>Scheduled Time: </label>
                         <input type="text" id="time" ref={time}
                             required autoFocus className="form-control" placeholder="Time"
                             proptype="varchar"
@@ -104,8 +104,8 @@ export const WatchPartyForm = (props) => {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="location">Location: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="location" style={{ color: 'white' }}>Location: </label>
                         <input type="text" id="location" ref={location}
                             required autoFocus className="form-control" placeholder="Location"
                             proptype="varchar"
@@ -114,8 +114,8 @@ export const WatchPartyForm = (props) => {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="fans">Max Fans Allowed: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="fans" style={{ color: 'white' }}>Fans Allowed: </label>
                         <input type="text" id="fans" ref={fans}
                             required autoFocus className="form-control" placeholder="Max Fans"
                             proptype="varchar"
@@ -123,7 +123,7 @@ export const WatchPartyForm = (props) => {
                         />
                     </div>
                 </fieldset>
-                <button type="submit"
+                <button className="btn btn-primary btn-lg" type="submit"
                     onClick={evt => {
                         evt.preventDefault() // Prevent browser from submitting the form
                         createNewWatchParty()
@@ -135,10 +135,10 @@ export const WatchPartyForm = (props) => {
     } else if (watchparty.id === history.location.state.WatchParty) {
         return (
             <form className="watchpartyForm">
-                <h2 className="watchpartyForm__title">Watch Party</h2>
+                <h2 className="watchpartyForm__title" style={{ color: 'white' }}>Edit Watch Party</h2>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="name">Name: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="name" style={{ color: 'white' }}>Name: </label>
                         <input type="text" id="name" ref={name}
                             required autoFocus className="form-control" placeholder="Name"
                             proptype="varchar"
@@ -148,8 +148,8 @@ export const WatchPartyForm = (props) => {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="time">Scheduled Time: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="time" style={{ color: 'white' }}>Scheduled Time: </label>
                         <input type="text" id="time" ref={time}
                             required autoFocus className="form-control" placeholder="Time"
                             proptype="varchar"
@@ -159,8 +159,8 @@ export const WatchPartyForm = (props) => {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="location">Location: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="location" style={{ color: 'white' }}>Location: </label>
                         <input type="text" id="location" ref={location}
                             required autoFocus className="form-control" placeholder="Location"
                             proptype="varchar"
@@ -170,8 +170,8 @@ export const WatchPartyForm = (props) => {
                     </div>
                 </fieldset>
                 <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="fans">Max Fans Allowed: </label>
+                    <div className="form-group" style={{ maxWidth: "40rem" }}>
+                        <label htmlFor="fans" style={{ color: 'white' }}>Fans Allowed: </label>
                         <input type="text" id="fans" ref={fans}
                             required autoFocus className="form-control" placeholder="Max Fans"
                             proptype="varchar"
@@ -180,7 +180,7 @@ export const WatchPartyForm = (props) => {
                         />
                     </div>
                 </fieldset>
-                <button type="submit"
+                <button className="btn btn-primary btn-lg" type="btn btn-primary"
                     onClick={evt => {
                         evt.preventDefault()
                         // Prevent browser from submitting the form

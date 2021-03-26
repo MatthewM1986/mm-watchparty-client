@@ -15,24 +15,28 @@ export const WatchPartyList = () => {
 
     return (
         <article className="watchparties">
-            <header className="watchparty__header">
-                <h1>Watch Parties</h1>
+            <header className="watchparty__header" style={{ color: 'white' }}>
+                <h2 style={{ color: 'white' }}>Watch Parties</h2>
             </header>
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
             {
                 watchparties.map(wp => {
-                    return <section key={wp.id} className="watchparty">
-                        <div className="watchparty__name">Watch Party Name:{wp.name}</div>
-                        <div className="watchparty__scheduled_time">Scheduled Time:{wp.scheduled_time}</div>
-                        <div className="watchparty__game">Game to Watch:{wp.game.name}</div>
-                        <div className="watchparty__location">Watch party Location:{wp.location}</div>
-                        <div className="watchparty__number_of_fans">Number of Fans That Can Join:{wp.number_of_fans}</div>
+                    return <section key={wp.id}
+                        className="card text-white bg-primary mb-3" style={{ maxWidth: "40rem" }}>
+                        <h4 className="watchparty__name">{wp.name}</h4>
+                        <h5 className="watchparty__scheduled_time">Scheduled Time:&nbsp;&nbsp;&nbsp;{wp.scheduled_time}</h5>
+                        <h5 className="watchparty__game">Game:&nbsp;&nbsp;&nbsp;{wp.game.name}</h5>
+                        <h5 className="watchparty__location">Location:&nbsp;&nbsp;&nbsp;{wp.location}</h5>
+                        <h5 className="watchparty__number_of_fans">Number of Fans:&nbsp;&nbsp;&nbsp;{wp.number_of_fans}</h5>
                         {
                             wp.joined
-                                ? <button className="btn btn-3"
+                                ? <button className="btn btn-secondary btn-lg"
                                     onClick={() => leaveWatchParty(wp.id)}
 
                                 >Leave</button>
-                                : <button className="btn btn-2"
+                                : <button className="btn btn-secondary btn-lg"
                                     onClick={() => joinWatchParty(wp.id)}
                                 >Join</button>
                         }

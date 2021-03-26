@@ -42,25 +42,34 @@ export const Login = props => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Watch Party</h1>
-                    <h2>Please sign in</h2>
+                    <h1 style={{ color: 'white' }}>Watch Party</h1>
+                    <h4 style={{ color: 'white' }}>Please sign in</h4>
                     <fieldset>
-                        <label htmlFor="inputUsername"> User Name </label>
-                        <input ref={username} type="username" id="username" className="form-control" placeholder="User Name" required autoFocus />
+                        <label htmlFor="inputUsername" style={{ color: 'white' }}>  User Name </label>
+                        <input ref={username} type="username" id="username" className="form-control" style={{ maxWidth: "40rem" }} placeholder="User Name" required autoFocus />
                     </fieldset>
+                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                     <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
+                        <label htmlFor="inputPassword" style={{ color: 'white' }}>  Password </label>
+                        <input ref={password} type="password" id="password" className="form-control" style={{ maxWidth: "40rem" }} placeholder="Password" required />
                     </fieldset>
+                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                     <fieldset style={{
-                        textAlign: "center"
+                        textAlign: "left"
                     }}>
-                        <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
+                        <button className="btn btn-primary btn-sm" type="submit">Sign In</button>
                     </fieldset>
+                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
+                <Link to="/register" style={{ color: 'white' }}>Not a member yet?</Link>
             </section>
         </main>
     )
