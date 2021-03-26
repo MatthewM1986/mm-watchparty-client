@@ -17,19 +17,23 @@ export const GameList = () => {
     return (
         <article className="games">
             <header className="game__header">
-                <h1>Games</h1>
+                <h2 style={{ color: 'white' }}>Games</h2>
             </header>
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
             {
                 games.map(game => {
-                    return <section key={game.id} className="game">
-                        <div className="game__name">{game.name}</div>
-                        <div className="game__sport_type">{game.sport_type.type}</div>
-                        <div className="game__team_one">{game.team_one}</div>
-                        <div className="game__team_two">{game.team_two}</div>
-                        <div className="game__description">{game.description}</div>
+                    return <section key={game.id} className="game"
+                        className="card text-white bg-primary mb-3" style={{ maxWidth: "40rem" }}>
+                        <h4 className="game__name">{game.name}</h4>
+                        <h5 className="game__sport_type">Sport:&nbsp;&nbsp;&nbsp;{game.sport_type.type}</h5>
+                        <h5 className="game__team_one">Team:&nbsp;&nbsp;&nbsp;{game.team_one}</h5>
+                        <h5 className="game__team_two">Team:&nbsp;&nbsp;&nbsp;{game.team_two}</h5>
+                        <h5 className="game__description">Description:&nbsp;&nbsp;&nbsp;{game.description}</h5>
 
-                        <button className="create__watchparty">
-                            <Link
+                        <button className="btn btn-secondary btn-sm">
+                            <Link className="btn btn-secondary"
                                 to={{
                                     pathname: `/watchparties/${game.id}/create`,
                                     state: { game: game.id },
@@ -37,11 +41,6 @@ export const GameList = () => {
                                 }}>
                                 Create </Link>
                         </button>
-                        {/* <button className="search__watchparty"
-                            onClick={() => {
-                                // history.push("/watchparties/game_id")
-                            }}
-                        >Search Watch Parties</button> */}
                     </section >
                 })
             }
